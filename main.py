@@ -1,7 +1,12 @@
+import os
 import re
+import sys
 
+# fix compile
+sys.stdout = open(os.devnull, 'w')
+sys.stderr = open(os.devnull, 'w')
 import eel
-
+# fix compile
 
 def find_all_names(gpss):
     line_with_name_pattern = re.compile(r'^([a-zA-Z0-9_]+).*$')
