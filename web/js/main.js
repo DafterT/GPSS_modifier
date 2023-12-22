@@ -17,40 +17,37 @@ file_input_in_first_container_element.addEventListener('change', (element) => {
 });
 
 download = (data, filename, type_) => {
-    var file = new Blob([data], {type: type_});
-    if (window.navigator.msSaveOrOpenBlob) // IE10+
-        window.navigator.msSaveOrOpenBlob(file, filename);
-    else { // Others
-        var a = document.createElement("a"),
-                url = URL.createObjectURL(file);
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(() => {
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);  
-        }, 0); 
-    }
+    // Create download button
+    let file = new Blob([data], {type: type_});
+    const a = document.createElement("a")
+    const url = URL.createObjectURL(file);
+    a.href = url;
+    a.download = filename;
+    // Download
+    a.click();
+    window.URL.revokeObjectURL(url);
 };
 
 shake_submit_button = () => {
     third_container_element.classList.add("shake");
     setTimeout(() => {
         third_container_element.classList.remove("shake");
-}, 500)};
+    }, 500)
+};
 
 submit_button.addEventListener('click', () => {
     if (file_input_in_first_container_element.files.length > 0 &&
-        postfix_text_in_second_container_element.value.length != 0) {
-            submit_button.disabled = true;
-            const reader = new FileReader();  
-            reader.onload = async () => {
-                let text_result = await eel.get_text_from_python(reader.result, postfix_text_in_second_container_element.value)();
-                download(text_result, 'new_file.gpss', 'text/plain');
-                submit_button.disabled = false;
-            };
-            reader.readAsText(file_input_in_first_container_element.files[0]);
+        postfix_text_in_second_container_element.value.length !== 0) {
+        submit_button.disabled = true;
+        const reader = new FileReader();
+        reader.onload = async () => {
+            const postfix = postfix_text_in_second_container_element.value;
+            const old_file_name = file_input_in_first_container_element.files[0].name.split('.').slice(0, -1).join('.');
+            const text_result = await eel.get_text_from_python(reader.result, postfix)();
+            download(text_result, `${old_file_name}${postfix}.gpss`, 'text/plain');
+            submit_button.disabled = false;
+        };
+        reader.readAsText(file_input_in_first_container_element.files[0]);
     } else {
         shake_submit_button();
     }
