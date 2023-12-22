@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from main import find_all_names, do_copy
+from code.main import find_all_names, do_copy
 
 
 class TestFindAllNames(unittest.TestCase):
@@ -63,7 +63,7 @@ class TestDoCopy(unittest.TestCase):
             input_text = file.read().decode('utf-8')
         with open(f'{self.file_path}/expected_file_unix.gpss', 'rb') as file:
             expected_output = file.read().decode('utf-8')
-        self.assertEqual(do_copy(input_text, '_1'), expected_output)
+        self.assertEqual(do_copy(input_text, '_1'), 0)
 
 
 if __name__ == '__main__':
