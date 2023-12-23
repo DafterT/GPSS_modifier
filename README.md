@@ -1,8 +1,8 @@
 <p align="center">
 <img src="https://github.com/DafterT/GPSS_modifier/actions/workflows/tests.yaml/badge.svg">
 <img src="https://img.shields.io/badge/made%20by-Dafter-orange.svg">
-<img src="https://img.shields.io/github/license/DafterT/ApiSpbStuRuz">
-<img src="https://img.shields.io/github/last-commit/DafterT/ApiSpbStuRuz">
+<img src="https://img.shields.io/github/license/DafterT/GPSS_modifier">
+<img src="https://img.shields.io/github/last-commit/DafterT/GPSS_modifier">
 </p>
 
 # Задача
