@@ -23,6 +23,7 @@ download = (data, filename, type_) => {
     const url = URL.createObjectURL(file);
     a.href = url;
     a.download = filename;
+    a.target = '_blank';
     // Download
     a.click();
     window.URL.revokeObjectURL(url);
